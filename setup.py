@@ -9,6 +9,14 @@ setup(
     long_description=open('README.md').read(),  # Asegúrate de llamar a read()
     author='Leo',
     include_package_data=True,
-    platforms='Windows',  # Corrige el error de sintaxis, añadiendo la coma
-    install_requires=['flask']
+    platforms='any',  # Corrige el error de sintaxis, añadiendo la coma
+    install_requires=['flask'],
+    classifiers=[
+        "Development Status :: 1 - Planning",
+        "Environment :: Web Environment",
+        "Framework :: Flask",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent"
+    ]
 )
