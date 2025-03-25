@@ -1,3 +1,8 @@
+import os
+import json
+import sys
+import math
+import cmath
 class Basic:
     """
     Esta es una clase pa facilitarte la vida y que no te compliques con otros modulos y acciones :)
@@ -11,6 +16,23 @@ class Basic:
         self.nombre = nombre
         pass
 
+    def virtualenv_check():
+        """
+        Este es el modulo que te ajusta mis  entorno tu tranqui
+        solito se encarga de instalar las librerias que necesitas
+        para que todo funcione correctamente
+        :) 
+        """
+        if hasattr(sys, 'real_prefix') or (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix):
+            R = input("Tienes un entorno virtual? [Y/N]:")
+            if R == "Y" or R == "y":
+                print("Perfecto no te preocupes esta accion solo se ejecuta una vez")
+                json_file = os.mkdir("REGISTRO",exist_ok=True)
+                json_file.write(json.dumps({"Entorno_Virual":"True"}))
+            elif R == "N" or R == "n":
+                print("Estas seguro?")    
+
+
     def Mate(self,Propiedad:str,a:int,b:int):
         """
         Esta es para sumar pero solo si le pones la propiedad sum
@@ -18,7 +40,6 @@ class Basic:
         multiplicar mult tambien por su puesto NO SE TE OCURRA PONER
         1/0 que te apago la compu hdp.
         """
-        import os
         if Propiedad == "sum":
             Res = a + b
             return Res
@@ -35,7 +56,61 @@ class Basic:
             Res = a * b
             return Res
         else:
-            return print(f"No opera asi esta cosa :( con la propiedad que pusiste '{Propiedad}'")    
+            return print(f"No opera asi esta cosa :( con la propiedad que pusiste '{Propiedad}'")
+
+    def Raiz(self, numero: int):
+        """
+        Calcula la raíz cuadrada de un número.
+        - Devuelve un número real si es positivo.
+        - Devuelve un número complejo si es negativo.
+        """
+        if numero >= 0:
+            return math.sqrt(numero)  # Raíz real
+        else:
+            return cmath.sqrt(numero)  # Raíz compleja
+
+    def Potencia(self, base: int, exponente: int):
+        """
+        Calcula la potencia de un numero.
+        """
+        L = base ** exponente
+        return L
+
+    def Factorial(self, numero: int):
+        """
+        Calcula el factorial de un número.
+        """
+        return math.factorial(numero)
+
+    def Trigonometria(self, angulo: int, tipo: str):
+        """
+        Calcula el seno, coseno y tangente de un ángulo en grados
+        en este caso se hace el tipo de operacion que se quiere:
+        - sen: seno
+        - cos: coseno
+        - tan: tangente
+        """
+        if tipo == "sen":
+            return math.sin(math.radians(angulo))
+        elif tipo == "cos":
+            return math.cos(math.radians(angulo))
+        elif tipo == "tan":
+            return math.tan(math.radians(angulo))
+        else:
+            return "Tipo de operación no válida."
+
+    def Logaritmo(self, numero: int, base: int):
+        """
+        Calcula el logaritmo de un número en una base específica.
+        """
+        return math.log(numero, base)
+
+    def Exponencial(self, numero: int):
+        """
+        Calcula la función exponencial de un número.
+        """
+        return math.exp(numero)
+                    
     def analizador(self, location: str, target_type: str, target: str, see: bool):
         """
         Este es el analizador de carpetas el cual busca un archivo en específico y
@@ -48,7 +123,6 @@ class Basic:
         También se puede usar para buscar carpetas cuando pones el 'target_type' como "carpet".
         En ese caso, debes poner 'file' para archivos y 'carpet' para carpetas.
         """
-        import os
         Loc = {}
         
         # Recorremos el directorio y subdirectorios
@@ -75,25 +149,5 @@ class Basic:
         
         # Si no se encontró nada, se muestra un mensaje
         print(f"No se encontró {target} en la ubicación especificada.")
-        return Loc
-    def Flask(self,Type_app:str,host:str,port:int,index:list):
-        """
-        Este es el modulo de flask, el cual te permite hacer una app web con python
-        solo tienes que poner el tipo de app que quieres hacer, si es una api o una app web
-        y el host y el puerto donde se va a alojar la app tambien el index o el app route de inicio
-        por ejemplo si quieres que tu app inicie en homte debes agregarlo en la lista como el 
-        primer elemento de la lista.
-
-        [index principal,index_secundario,etc]
-        """
-        from flask import Flask
-        app = Flask(__name__)
-        if Type_app == "api":
-            @app.route('/')
-            def hello_world():
-                return 'Hello, World!'
-        if Type_app == "web":
-            @app.route('/')
-            def hello_world():
-                return 'Hello, World!'
-        app.run(host=host,port=port,debug=True)
+        return Loc  
+      
